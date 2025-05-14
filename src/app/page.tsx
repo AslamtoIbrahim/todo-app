@@ -1,11 +1,12 @@
-import React from 'react'
+import Main from "./components/Main";
 
 const page = () => {
   return (
-    <div>
-      <p className='text-5xl text-lime-400 font-jose dark:text-violet-300'>TODO LIST</p>
+    <div className="bg-very-light-grayish-blue dark:bg-very-dark-blue h-screen">
+      <Main />
     </div>
-  )
-}
+      
+  );
+};
 
-export default page
+export default page;

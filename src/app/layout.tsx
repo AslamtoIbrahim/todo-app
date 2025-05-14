@@ -1,12 +1,13 @@
 import type { Metadata } from "next";
 import { Geist, Geist_Mono, Josefin_Sans } from "next/font/google";
 import "./globals.css";
+import { ThemeProvider } from "next-themes";
 
 const josefin = Josefin_Sans({
-  subsets: ['latin'],
-  weight: ['400', '700'],
-  variable: '--font-josefin'
-})
+  subsets: ["latin"],
+  weight: ["400", "700"],
+  variable: "--font-josefin",
+});
 
 const geistSans = Geist({
   variable: "--font-geist-sans",
@@ -29,7 +30,7 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="en">
+    <html lang="en" className="">
       <body
         className={`${geistSans.variable} ${geistMono.variable} ${josefin.variable} antialiased`}
       >
