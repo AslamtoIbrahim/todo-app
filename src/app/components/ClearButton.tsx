@@ -2,9 +2,9 @@ import React from 'react'
 
 const ClearButton = () => {
   return (
-    <div>
+    <button className='text-dark-grayish-blue text-sm md:text-base xl:text-lg cursor-pointer hover:text-dark-grayish-blue/70 dark:hover:text-light-grayish-blue-hover/50'>
       Clear Completed
-    </div>
+    </button>
   )
 }
 

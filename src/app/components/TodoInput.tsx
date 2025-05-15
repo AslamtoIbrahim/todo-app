@@ -3,14 +3,14 @@ import React from "react";
 const TodoInput = () => {
   return (
     <div className="bg-very-light-gray dark:bg-very-dark-desaturated-blue rounded-md 
-    flex items-start  gap-3 px-xm py-ym"
+    flex items-start  gap-3 px-xm py-ym md:px-xmd md:py-ymd lg:px-xlg lg:py-ylg"
      >
       <label
         htmlFor="input"
         className="w-5 h-5 shrink-0 rounded-full outline-none border border-light-grayish-blue dark:border-very-dark-grayish-blue-1 cursor-pointer "
       />
       <input
-        className="text-very-dark-grayish-blue self-baseline-last dark:text-light-grayish-blue text-sm 
+        className="text-very-dark-grayish-blue self-baseline-last dark:text-light-grayish-blue text-sm md:text-base
         w-full outline-none "
         type="text"
         id="input"

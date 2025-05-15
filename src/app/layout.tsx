@@ -1,7 +1,6 @@
 import type { Metadata } from "next";
 import { Geist, Geist_Mono, Josefin_Sans } from "next/font/google";
 import "./globals.css";
-import { ThemeProvider } from "next-themes";
 
 const josefin = Josefin_Sans({
   subsets: ["latin"],
@@ -30,9 +29,10 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="en" className="">
+    <html lang="en" className="dark">
       <body
-        className={`${geistSans.variable} ${geistMono.variable} ${josefin.variable} antialiased`}
+        className={`${geistSans.variable} ${geistMono.variable} ${josefin.variable} antialiased 
+        bg-very-light-grayish-blue dark:bg-very-dark-blue`}
       >
         {children}
       </body>

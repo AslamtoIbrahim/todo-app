@@ -2,7 +2,7 @@ import Main from "./components/Main";
 
 const page = () => {
   return (
-    <div className="bg-very-light-grayish-blue dark:bg-very-dark-blue h-screen">
+    <div className="">
       <Main />
     </div>
       

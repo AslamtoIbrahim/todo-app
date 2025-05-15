@@ -1,21 +1,31 @@
 import React from "react";
 import TodoItem from "./TodoItem";
 import ClearButton from "./ClearButton";
+import FilterButton from "./FilterButton";
 
 const TodoListView = () => {
   return (
     <div
-      className="bg-very-light-gray dark:bg-very-dark-desaturated-blue h-96 rounded-md 
-                shadow-xl shadow-dark-grayish-blue/15 dark:shadow-none flex flex-col "
+      className="bg-very-light-gray dark:bg-very-dark-desaturated-blue min-h-96 max-h-[35rem]  rounded-md 
+                shadow-xl shadow-dark-grayish-blue/15 dark:shadow-none flex flex-col justify-between "
     >
-      <section>
+      <section className="overflow-auto">
+        <TodoItem />
         <TodoItem />
         <TodoItem />
         <TodoItem />
         <TodoItem />
       </section>
-      <section className="w-full flex justify-between items-center place-self-end px-xm py-ym bg-lime-400">
-        <p>5 item left</p>
+      <section
+        className="w-full flex justify-between items-center px-xm py-ym md:px-xmd md:py-ymd lg:px-xlg lg:py-ylg
+       text-dark-grayish-blue text-sm md:text-base xl:text-lg"
+      >
+        <p>5 items left</p>
+        <section className="hidden md:flex items-center justify-center gap-5 ">
+          <FilterButton text="all" />
+          <FilterButton text="active" />
+          <FilterButton text="completed" />
+        </section>
         <ClearButton />
       </section>
     </div>
