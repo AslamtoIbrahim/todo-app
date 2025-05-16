@@ -1,4 +1,4 @@
-import React, { useContext, useEffect } from "react";
+import React, { useContext, useEffect, useRef } from "react";
 import TodoItem from "./TodoItem";
 import ClearButton from "./ClearButton";
 import FilterButton from "./FilterButton";
@@ -16,6 +16,15 @@ const TodoListView = () => {
     const dotos: Todo[] = JSON.parse(todosStorage);
     todoManger.setTodos(dotos);
   }, []);
+
+  const setOnClearButtonLisitener = () => {
+    todoManger.clearCompletedTodos();
+  };
+
+  // get amount of todos left
+  const todosLeft = todoManger.todos.filter(
+    (todo) => todo.isCompleted === false
+  ).length;
 
   return (
     <div
@@ -36,15 +45,13 @@ const TodoListView = () => {
         className="w-full flex justify-between items-center px-xm py-ym md:px-xmd md:py-ymd lg:px-xlg lg:py-ylg
        text-dark-grayish-blue text-sm md:text-base xl:text-lg"
       >
-        <p>{`${todoManger.todos.length} item${
-          todoManger.todos.length > 1 ? "s" : ""
-        } left`}</p>
+        <p>{`${todosLeft} item${todosLeft > 1 ? "s" : ""} left`}</p>
         <section className="hidden md:flex items-center justify-center gap-5 ">
           <FilterButton text="all" />
           <FilterButton text="active" />
           <FilterButton text="completed" />
         </section>
-        <ClearButton />
+        <ClearButton onClearButtonClick={setOnClearButtonLisitener} />
       </section>
     </div>
   );
