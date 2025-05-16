@@ -32,6 +32,11 @@ const todoReducer = (todos: Todo[], action: Action) => {
       modifyStorage(newTodos);
       return newTodos;
     }
+    case 'CLEAR_COMPLETED_TODOS':{
+      const uncompletedTodos = todos.filter(todo => todo.isCompleted === false);
+      modifyStorage(uncompletedTodos);
+      return uncompletedTodos;
+    }
     default: {
       return todos;
     }
@@ -52,12 +57,18 @@ const TodoManager = ({ children }: { children: React.ReactNode }) => {
   const deleteTodo = (id: string) => {
     dispatchTodo({ type: "DELETE_TODO", id: id });
   };
+
+  const clearCompletedTodos = () => {
+    dispatchTodo({ type: "CLEAR_COMPLETED_TODOS" });
+  };
+
   const todoValue = {
     todos: todos,
     setTodos: setTodos,
     addTodo: addTodo,
     updateTodo: updateTodo,
     deleteTodo: deleteTodo,
+    clearCompletedTodos: clearCompletedTodos,
   };
 
   return (

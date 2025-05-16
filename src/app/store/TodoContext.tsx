@@ -7,6 +7,7 @@ const defaultTodo = {
   addTodo: (todo: Todo) => {},
   updateTodo: (id: string, todo: UpdtedTodo) => {},
   deleteTodo: (id: string) => {},
+  clearCompletedTodos: () => {},
 };
 
 const TodoManagerContext = createContext(defaultTodo);

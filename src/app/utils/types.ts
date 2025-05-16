@@ -28,4 +28,7 @@ export type Action =
   | {
       type: "DELETE_TODO";
       id: string;
+    }
+  | {
+      type: "CLEAR_COMPLETED_TODOS";
     };
