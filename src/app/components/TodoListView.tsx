@@ -36,7 +36,9 @@ const TodoListView = () => {
         className="w-full flex justify-between items-center px-xm py-ym md:px-xmd md:py-ymd lg:px-xlg lg:py-ylg
        text-dark-grayish-blue text-sm md:text-base xl:text-lg"
       >
-        <p>5 items left</p>
+        <p>{`${todoManger.todos.length} item${
+          todoManger.todos.length > 1 ? "s" : ""
+        } left`}</p>
         <section className="hidden md:flex items-center justify-center gap-5 ">
           <FilterButton text="all" />
           <FilterButton text="active" />
