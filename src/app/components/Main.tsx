@@ -1,44 +1,54 @@
-'use client'
-import React, { useEffect, useState } from "react";
+"use client";
+import React, { useContext, useEffect, useState } from "react";
 import ThemeButton from "./ThemeButton";
 import TodoInput from "./TodoInput";
 import TodoListView from "./TodoListView";
 import FilterView from "./FilterView";
+import { DATA_KEY, Todo } from "../utils/types";
+import TodoManagerContext from "../store/TodoContext";
 
 const Main = () => {
   const [theme, setTheme] = useState("system");
   const [ismounted, setIsmounted] = useState(false);
+  const todoManger = useContext(TodoManagerContext);
+
+  const changeMode = (mode: string) => {
+    const htmlElement = window.document.documentElement;
+    htmlElement.classList.remove("light", "dark");
+    htmlElement.classList.add(mode);
+  };
 
   useEffect(() => {
     setIsmounted(true);
-  }, []);
+  }, [ismounted]);
 
   useEffect(() => {
     if (!ismounted) {
       return;
     }
-
-    const htmlElement = window.document.documentElement;
-    htmlElement.classList.remove("light", "dark");
-
+    
     const mode = localStorage.getItem("theme") || "system";
     if (mode === "system") {
       const themeSystem = window.matchMedia("(prefers-color-scheme: dark)")
-        .matches
-        ? "dark"
-        : "light";
+      .matches
+      ? "dark"
+      : "light";
+
       setTheme(themeSystem);
-      htmlElement.classList.add(themeSystem);
+      changeMode(themeSystem);
       return;
     }
 
     setTheme(mode);
-    htmlElement.classList.add(mode);
-  }, [theme, ismounted]);
+
+    changeMode(mode);
+  }, [ismounted]);
 
   const onClickThemeListener = () => {
+
     const newTheme = theme === "light" ? "dark" : "light";
     setTheme(newTheme);
+    changeMode(newTheme);
     localStorage.setItem("theme", newTheme);
   };
 
