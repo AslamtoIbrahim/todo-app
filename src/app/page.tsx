@@ -1,5 +1,7 @@
+'use client'
 import { ThemeProvider } from "next-themes";
 import Main from "./components/Main";
+import TodoManager from "./store/TodoManager";
 
 const page = () => {
   return (
@@ -9,7 +11,9 @@ const page = () => {
         defaultTheme="system"
         enableSystem={true}
       >
-        <Main />
+        <TodoManager>
+          <Main />
+        </TodoManager>
       </ThemeProvider>
     </div>
   );
