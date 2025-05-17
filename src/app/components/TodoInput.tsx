@@ -1,4 +1,4 @@
-import React, { useContext, useEffect, useRef } from "react";
+import { useContext, useEffect, useRef } from "react";
 import TodoManagerContext from "../store/TodoContext";
 import { Todo } from "../utils/types";
 
@@ -28,6 +28,7 @@ const TodoInput = () => {
 
         todoManger.addTodo(newTodo);
         ref.current.value = "";
+ 
       }
     };
     document.addEventListener("keydown", addTodoByEnterKey);

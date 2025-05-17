@@ -1,15 +1,30 @@
 import React from "react";
 
 type FilterButtonProps = {
-  text: string;
+  value: string;
+  isChecked: boolean;
+  onFliterClick: (value: string) => void;
 };
 
-const FilterButton = ({ text }: FilterButtonProps) => {
+const FilterButton = ({
+  value,
+  isChecked,
+  onFliterClick,
+}: FilterButtonProps) => {
+  const handleClick = () => {
+    onFliterClick(value);
+  };
   return (
-    <button className="text-dark-grayish-blue text-sm md:text-base cursor-pointer
-     hover:text-dark-grayish-blue/70 dark:hover:text-light-grayish-blue-hover/50
-    focus:text-bright-blue capitalize font-semibold">
-      {text}
+    <button
+      onClick={handleClick}
+      className={` text-sm md:text-base cursor-pointer capitalize font-semibold 
+        ${
+          isChecked
+            ? "text-bright-blue hover:text-bright-blue/90"
+            : "text-dark-grayish-blue hover:text-dark-grayish-blue/70 dark:hover:text-light-grayish-blue-hover/50"
+        }`}
+    >
+      {value}
     </button>
   );
 };

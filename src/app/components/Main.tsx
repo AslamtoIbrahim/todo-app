@@ -1,17 +1,14 @@
 "use client";
-import React, { useContext, useEffect, useState } from "react";
+import { useEffect, useState } from "react";
+import { THEME_KEY } from "../utils/types";
+import FilterView from "./FilterView";
 import ThemeButton from "./ThemeButton";
 import TodoInput from "./TodoInput";
 import TodoListView from "./TodoListView";
-import FilterView from "./FilterView";
-import { DATA_KEY, Todo } from "../utils/types";
-import TodoManagerContext from "../store/TodoContext";
 
 const Main = () => {
   const [theme, setTheme] = useState("system");
   const [ismounted, setIsmounted] = useState(false);
-  const todoManger = useContext(TodoManagerContext);
-
   const changeMode = (mode: string) => {
     const htmlElement = window.document.documentElement;
     htmlElement.classList.remove("light", "dark");
@@ -26,13 +23,13 @@ const Main = () => {
     if (!ismounted) {
       return;
     }
-    
-    const mode = localStorage.getItem("theme") || "system";
+
+    const mode = localStorage.getItem(THEME_KEY) || "system";
     if (mode === "system") {
       const themeSystem = window.matchMedia("(prefers-color-scheme: dark)")
-      .matches
-      ? "dark"
-      : "light";
+        .matches
+        ? "dark"
+        : "light";
 
       setTheme(themeSystem);
       changeMode(themeSystem);
@@ -45,11 +42,10 @@ const Main = () => {
   }, [ismounted]);
 
   const onClickThemeListener = () => {
-
     const newTheme = theme === "light" ? "dark" : "light";
     setTheme(newTheme);
     changeMode(newTheme);
-    localStorage.setItem("theme", newTheme);
+    localStorage.setItem(THEME_KEY, newTheme);
   };
 
   if (!ismounted) {

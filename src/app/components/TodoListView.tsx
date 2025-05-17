@@ -1,20 +1,19 @@
-import React, { useContext, useEffect, useRef } from "react";
-import TodoItem from "./TodoItem";
-import ClearButton from "./ClearButton";
-import FilterButton from "./FilterButton";
-import { DATA_KEY, Todo } from "../utils/types";
+import { useContext, useEffect } from "react";
 import TodoManagerContext from "../store/TodoContext";
+import { DATA_KEY, Todo } from "../utils/types";
+import ClearButton from "./ClearButton";
+import FliterControl from "./FliterControl";
+import TodoItemsList from "./TodoItemsList";
 
 const TodoListView = () => {
   const todoManger = useContext(TodoManagerContext);
-
   // here goes logic of setting todos data
   useEffect(() => {
     const todosStorage = localStorage.getItem(DATA_KEY);
     if (!todosStorage) return;
-
-    const dotos: Todo[] = JSON.parse(todosStorage);
-    todoManger.setTodos(dotos);
+    const todos: Todo[] = JSON.parse(todosStorage);
+    todoManger.setTodos(todos);
+    console.log("🧧 todos ", todos);
   }, []);
 
   const setOnClearButtonLisitener = () => {
@@ -32,14 +31,7 @@ const TodoListView = () => {
                 shadow-xl shadow-dark-grayish-blue/15 dark:shadow-none flex flex-col justify-between "
     >
       <section className="overflow-auto">
-        {todoManger.todos.map((todo) => (
-          <TodoItem
-            key={todo.id}
-            id={todo.id}
-            text={todo.text}
-            isCompleted={todo.isCompleted}
-          />
-        ))}
+        <TodoItemsList />
       </section>
       <section
         className="w-full flex justify-between items-center px-xm py-ym md:px-xmd md:py-ymd lg:px-xlg lg:py-ylg
@@ -47,9 +39,7 @@ const TodoListView = () => {
       >
         <p>{`${todosLeft} item${todosLeft > 1 ? "s" : ""} left`}</p>
         <section className="hidden md:flex items-center justify-center gap-5 ">
-          <FilterButton text="all" />
-          <FilterButton text="active" />
-          <FilterButton text="completed" />
+          <FliterControl />
         </section>
         <ClearButton onClearButtonClick={setOnClearButtonLisitener} />
       </section>

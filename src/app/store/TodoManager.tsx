@@ -1,9 +1,38 @@
-import React, { useReducer } from "react";
-import { Action, DATA_KEY, Todo, UpdtedTodo } from "../utils/types";
+import React, { useEffect, useReducer } from "react";
+import {
+  Action,
+  ACTIVE_TODOS,
+  ALL_TODOS,
+  COMPLETED_TODOS,
+  DATA_KEY,
+  Todo,
+  UpdtedTodo,
+} from "../utils/types";
 import TodoManagerContext from "./TodoContext";
 
 const modifyStorage = (todos: Todo[]) => {
   localStorage.setItem(DATA_KEY, JSON.stringify(todos));
+};
+
+const filterTodosList = (todos: Todo[], filter: string): Todo[] => {
+  console.log("filter 🎁", filter);
+  const localStore = localStorage.getItem(DATA_KEY);
+  if (!localStore) return todos;
+  const todosFromStorage: Todo[] = JSON.parse(localStore);
+  switch (filter) {
+    case ACTIVE_TODOS: {
+      return todosFromStorage.filter((todo) => todo.isCompleted === false);
+    }
+    case COMPLETED_TODOS: {
+      return todosFromStorage.filter((todo) => todo.isCompleted === true);
+    }
+    case ALL_TODOS: {
+      return todosFromStorage;
+    }
+    default: {
+      return todos;
+    }
+  }
 };
 
 const initialState: Todo[] = [];
@@ -32,11 +61,14 @@ const todoReducer = (todos: Todo[], action: Action) => {
       modifyStorage(newTodos);
       return newTodos;
     }
-    case 'CLEAR_COMPLETED_TODOS':{
-      const uncompletedTodos = todos.filter(todo => todo.isCompleted === false);
+    case "CLEAR_COMPLETED_TODOS": {
+      const uncompletedTodos = todos.filter(
+        (todo) => todo.isCompleted === false
+      );
       modifyStorage(uncompletedTodos);
       return uncompletedTodos;
     }
+
     default: {
       return todos;
     }
@@ -44,6 +76,8 @@ const todoReducer = (todos: Todo[], action: Action) => {
 };
 
 const TodoManager = ({ children }: { children: React.ReactNode }) => {
+  console.log("🎆 🎇 TodoManager");
+
   const [todos, dispatchTodo] = useReducer(todoReducer, initialState);
   const setTodos = (todos: Todo[]) => {
     dispatchTodo({ type: "SET_TODOS", value: todos });
@@ -61,6 +95,12 @@ const TodoManager = ({ children }: { children: React.ReactNode }) => {
   const clearCompletedTodos = () => {
     dispatchTodo({ type: "CLEAR_COMPLETED_TODOS" });
   };
+
+ 
+
+  useEffect(() => {
+    console.log("👒 ⛑ useEffect trigger");
+  }, [todos]);
 
   const todoValue = {
     todos: todos,
