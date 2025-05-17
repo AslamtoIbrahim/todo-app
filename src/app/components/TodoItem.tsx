@@ -1,15 +1,32 @@
 "use client";
-import React, { useContext, useEffect, useRef, useState } from "react";
+import React, {
+  DragEventHandler,
+  useContext,
+  useEffect,
+  useRef,
+  useState,
+} from "react";
 import { Todo } from "../utils/types";
 import TodoManagerContext from "../store/TodoContext";
 
-const TodoItem = ({ id, text, isCompleted }: Todo) => {
+type ItemProps = Todo & {
+  ondragOver: (e: React.DragEvent) => void;
+  onDragItem: (e: React.DragEvent) => void;
+  onDropItem: (e: React.DragEvent) => void;
+};
 
+const TodoItem = ({
+  ondragOver,
+  onDragItem,
+  onDropItem,
+  id,
+  text,
+  isCompleted,
+}: ItemProps) => {
   const [isCheck, setIsCheck] = useState(isCompleted);
   const [isEdited, setIsEdited] = useState(false);
   const ref = useRef<HTMLInputElement>(null);
   const todoManger = useContext(TodoManagerContext);
-
 
   useEffect(() => {
     if (!isEdited) {
@@ -26,7 +43,7 @@ const TodoItem = ({ id, text, isCompleted }: Todo) => {
       if (ref.current !== document.activeElement) return;
 
       const newText = ref.current!.value.trim();
-      if (newText === text || newText === ""){
+      if (newText === text || newText === "") {
         setIsEdited(false);
         return;
       }
@@ -38,7 +55,6 @@ const TodoItem = ({ id, text, isCompleted }: Todo) => {
 
       todoManger.updateTodo(id, updateTodo);
       setIsEdited(false);
-
     };
 
     window.addEventListener("keydown", todoUpdateListener);
@@ -63,9 +79,14 @@ const TodoItem = ({ id, text, isCompleted }: Todo) => {
     setIsEdited(true);
   };
 
-
   return (
-    <section>
+    <section
+      draggable
+      className="cursor-pointer"
+      onDragOver={ondragOver}
+      onDragStart={onDragItem}
+      onDrop={onDropItem}
+    >
       <div className="w-full flex justify-between items-center gap-3 py-ym px-xm md:px-xmd md:py-ymd lg:px-xlg lg:py-ylg">
         <button
           onClick={clickCheckHandler}
