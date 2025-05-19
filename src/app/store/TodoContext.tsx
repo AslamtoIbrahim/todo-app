@@ -3,13 +3,13 @@ import { Todo, UpdtedTodo } from "../utils/types";
 
 const defaultTodo = {
   todos: [] as Todo[],
-  setTodos: (todo: Todo[]) => {},
-  addTodo: (todo: Todo) => {},
-  updateTodo: (id: string, todo: UpdtedTodo) => {},
-  deleteTodo: (id: string) => {},
+  setTodos: (_todo: Todo[]) => {},
+  addTodo: (_todo: Todo) => {},
+  updateTodo: (_id: string, _todo: UpdtedTodo) => {},
+  deleteTodo: (_id: string) => {},
   clearCompletedTodos: () => {},
   filter: "all",
-  setFilterType: (filterType: string) => {},
+  setFilterType: (_filterType: string) => {},
 };
 
 const TodoManagerContext = createContext(defaultTodo);
