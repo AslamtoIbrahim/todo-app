@@ -9,9 +9,8 @@ import {
 import TodoItem from "./TodoItem";
 
 const TodoItemsList = () => {
-  // const filterManger = useContext(FilterMangerContext);
   const todoManager = useContext(TodoManagerContext);
-  const [dragIndex, setDragIndex] = useState(-1);
+  const [dragId, setDragId] = useState("");
 
   useEffect(() => {
     const filterStore = localStorage.getItem(FILTER_KEY) || "all";
@@ -34,29 +33,34 @@ const TodoItemsList = () => {
     e.preventDefault();
   };
 
-  const onDragItemHandler = (index: number) => {
-    console.log("🟣 Drag", index);
-    setDragIndex(index);
+  const onDragItemHandler = (id: string) => {
+    const dragIndex = todoManager.todos.findIndex((todo) => todo.id === id);
+    console.log("🟣 Drag index: ", dragIndex);
+    setDragId(id);
   };
-  const onDropItemHandler = (index: number) => {
-    console.log("🤎 Drop", index);
-    console.log("💙 Drag", dragIndex);
-    if (dragIndex === -1 || dragIndex === index) return;
+
+  const onDropItemHandler = (id: string) => {
+    if (dragId === "" || dragId === id) return;
+
     const newTodos = [...todoManager.todos];
+    const dragIndex = newTodos.findIndex((todo) => todo.id === dragId);
+    const dropIndex = newTodos.findIndex((todo) => todo.id === id);
     const draggedItem = newTodos[dragIndex];
     newTodos.splice(dragIndex, 1);
-    newTodos.splice(index, 0, draggedItem);
+    newTodos.splice(dropIndex, 0, draggedItem);
     todoManager.setTodos(newTodos);
-    setDragIndex(-1);
+    setDragId("");
+    console.log("🤎 Drop", dropIndex);
+    console.log("💙 Drag", dragIndex);
   };
 
   return (
     <>
-      {filterTodos().map((todo, index) => (
+      {filterTodos().map((todo) => (
         <TodoItem
           ondragOver={handleOndragOver}
-          onDragItem={() => onDragItemHandler(index)}
-          onDropItem={() => onDropItemHandler(index)}
+          onDragItem={() => onDragItemHandler(todo.id)}
+          onDropItem={() => onDropItemHandler(todo.id)}
           key={todo.id}
           id={todo.id}
           text={todo.text}
