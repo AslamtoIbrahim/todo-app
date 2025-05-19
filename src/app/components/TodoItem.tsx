@@ -10,13 +10,17 @@ import { Todo } from "../utils/types";
 
 type ItemProps = Todo & {
   ondragOver: (e: React.DragEvent) => void;
-  onDragItem: (e: React.DragEvent) => void;
+  ondragLeave: (e: React.DragEvent) => void;
+  onDragStartItem: (e: React.DragEvent) => void;
+  onDragEndItem: (e: React.DragEvent) => void;
   onDropItem: (e: React.DragEvent) => void;
 };
 
 const TodoItem = ({
   ondragOver,
-  onDragItem,
+  ondragLeave,
+  onDragStartItem,
+  onDragEndItem,
   onDropItem,
   id,
   text,
@@ -83,7 +87,9 @@ const TodoItem = ({
       draggable
       className="cursor-pointer"
       onDragOver={ondragOver}
-      onDragStart={onDragItem}
+      onDragLeave={ondragLeave}
+      onDragStart={onDragStartItem}
+      onDragEnd={onDragEndItem}
       onDrop={onDropItem}
     >
       <div className="w-full flex justify-between items-center gap-3 py-ym px-xm md:px-xmd md:py-ymd lg:px-xlg lg:py-ylg">

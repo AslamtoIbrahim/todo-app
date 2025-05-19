@@ -73,3 +73,10 @@
 body {
   transition: background-color 0.2s ease-in-out, color 0.5s ease-in-out;
 }
+
+.drag {
+  @apply bg-light-grayish-blue-hover dark:bg-very-dark-blue/50 
+}
+.drop {
+  @apply bg-light-grayish-blue dark:bg-very-dark-blue/80
+}

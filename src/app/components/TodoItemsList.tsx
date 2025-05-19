@@ -30,16 +30,23 @@ const TodoItemsList = () => {
 
   // this is very important to enable dragging
   const handleOndragOver = (e: React.DragEvent) => {
+    e.currentTarget.classList.add("drop");
     e.preventDefault();
   };
-
-  const onDragItemHandler = (id: string) => {
-    const dragIndex = todoManager.todos.findIndex((todo) => todo.id === id);
-    console.log("🟣 Drag index: ", dragIndex);
-    setDragId(id);
+  const onDragLeaveItemHandler = (e: React.DragEvent) => {
+    e.currentTarget.classList.remove("drop");
   };
 
-  const onDropItemHandler = (id: string) => {
+  const onDragStartItemHandler = (id: string, e: React.DragEvent) => {
+    e.currentTarget.classList.add("drag");
+    setDragId(id);
+  };
+  const onDragEndItemHandler = (e: React.DragEvent) => {
+    e.currentTarget.classList.remove("drag");
+  };
+
+  const onDropItemHandler = (id: string, e: React.DragEvent) => {
+
     if (dragId === "" || dragId === id) return;
 
     const newTodos = [...todoManager.todos];
@@ -50,8 +57,8 @@ const TodoItemsList = () => {
     newTodos.splice(dropIndex, 0, draggedItem);
     todoManager.setTodos(newTodos);
     setDragId("");
-    console.log("🤎 Drop", dropIndex);
-    console.log("💙 Drag", dragIndex);
+    e.currentTarget.classList.remove("drop");
+
   };
 
   return (
@@ -59,8 +66,12 @@ const TodoItemsList = () => {
       {filterTodos().map((todo) => (
         <TodoItem
           ondragOver={handleOndragOver}
-          onDragItem={() => onDragItemHandler(todo.id)}
-          onDropItem={() => onDropItemHandler(todo.id)}
+          ondragLeave={onDragLeaveItemHandler}
+          onDragStartItem={(e: React.DragEvent) =>
+            onDragStartItemHandler(todo.id, e)
+          }
+          onDragEndItem={onDragEndItemHandler}
+          onDropItem={(e: React.DragEvent) => onDropItemHandler(todo.id, e)}
           key={todo.id}
           id={todo.id}
           text={todo.text}
