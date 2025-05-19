@@ -8,6 +8,8 @@ const defaultTodo = {
   updateTodo: (id: string, todo: UpdtedTodo) => {},
   deleteTodo: (id: string) => {},
   clearCompletedTodos: () => {},
+  filter: "all",
+  setFilterType: (filterType: string) => {},
 };
 
 const TodoManagerContext = createContext(defaultTodo);

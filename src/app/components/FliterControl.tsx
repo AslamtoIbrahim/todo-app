@@ -1,5 +1,5 @@
-import { useContext, useEffect, useState } from "react";
-import FilterMangerContext from "../store/FilterContext";
+import { useContext, useEffect } from "react";
+import TodoManagerContext from "../store/TodoContext";
 import {
   ACTIVE_TODOS,
   ALL_TODOS,
@@ -9,34 +9,34 @@ import {
 import FilterButton from "./FilterButton";
 
 const FliterControl = () => {
-  const filterManger = useContext(FilterMangerContext);
+  const todoManger = useContext(TodoManagerContext);
+
 
   useEffect(() => {
     const fliterStoarge = localStorage.getItem(FILTER_KEY);
     if (!fliterStoarge) return;
-    filterManger.setFilterType(fliterStoarge);
+    todoManger.setFilterType(fliterStoarge);
   }, []);
 
 
   const onFilterClick = (value: string) => {
-    filterManger.setFilterType(value);
-    filterManger.setFilterType(value);
+    todoManger.setFilterType(value);
     localStorage.setItem(FILTER_KEY, value);
   };
   return (
     <div className="flex items-center justify-center gap-5">
       <FilterButton
-        isChecked={filterManger.filter === ALL_TODOS}
+        isChecked={todoManger.filter === ALL_TODOS}
         value="all"
         onFliterClick={onFilterClick}
       />
       <FilterButton
-        isChecked={filterManger.filter === ACTIVE_TODOS}
+        isChecked={todoManger.filter === ACTIVE_TODOS}
         value="active"
         onFliterClick={onFilterClick}
       />
       <FilterButton
-        isChecked={filterManger.filter === COMPLETED_TODOS}
+        isChecked={todoManger.filter === COMPLETED_TODOS}
         value="completed"
         onFliterClick={onFilterClick}
       />

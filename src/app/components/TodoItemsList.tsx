@@ -1,5 +1,4 @@
 import { useContext, useEffect, useState } from "react";
-import FilterMangerContext from "../store/FilterContext";
 import TodoManagerContext from "../store/TodoContext";
 import {
   ACTIVE_TODOS,
@@ -10,17 +9,17 @@ import {
 import TodoItem from "./TodoItem";
 
 const TodoItemsList = () => {
-  const filterManger = useContext(FilterMangerContext);
+  // const filterManger = useContext(FilterMangerContext);
   const todoManager = useContext(TodoManagerContext);
   const [dragIndex, setDragIndex] = useState(-1);
 
   useEffect(() => {
     const filterStore = localStorage.getItem(FILTER_KEY) || "all";
-    filterManger.setFilterType(filterStore);
+    todoManager.setFilterType(filterStore);
   }, []);
 
   const filterTodos = (): Todo[] => {
-    switch (filterManger.filter) {
+    switch (todoManager.filter) {
       case ACTIVE_TODOS:
         return todoManager.todos.filter((todo) => todo.isCompleted === false);
       case COMPLETED_TODOS:

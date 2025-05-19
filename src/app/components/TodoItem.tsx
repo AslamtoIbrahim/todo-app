@@ -1,13 +1,12 @@
 "use client";
 import React, {
-  DragEventHandler,
   useContext,
   useEffect,
   useRef,
-  useState,
+  useState
 } from "react";
-import { Todo } from "../utils/types";
 import TodoManagerContext from "../store/TodoContext";
+import { Todo } from "../utils/types";
 
 type ItemProps = Todo & {
   ondragOver: (e: React.DragEvent) => void;
