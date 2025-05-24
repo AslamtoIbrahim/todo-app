@@ -6,7 +6,7 @@ import React, {
   useState
 } from "react";
 import TodoManagerContext from "../store/TodoContext";
-import { Todo } from "../utils/types";
+import { Todo } from "../types/types";
 
 type ItemProps = Todo & {
   ondragOver: (e: React.DragEvent) => void;

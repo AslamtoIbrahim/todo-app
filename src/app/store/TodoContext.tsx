@@ -1,5 +1,5 @@
 import { createContext } from "react";
-import { Todo, UpdtedTodo } from "../utils/types";
+import { Todo, UpdtedTodo } from "../types/types";
 
 const defaultTodo = {
   todos: [] as Todo[],
@@ -15,3 +15,5 @@ const defaultTodo = {
 const TodoManagerContext = createContext(defaultTodo);
 
 export default TodoManagerContext;
+
+ 

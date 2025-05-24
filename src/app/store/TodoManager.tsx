@@ -1,11 +1,12 @@
 import React, { useReducer } from "react";
 import {
-  Action,
-  DATA_KEY,
+   
   Todo,
   UpdtedTodo
-} from "../utils/types";
+} from "../types/types";
 import TodoManagerContext from "./TodoContext";
+import { DATA_KEY } from "../types/keys";
+import { Action } from "../types/actions";
 
 const modifyStorage = (todos: Todo[]) => {
   localStorage.setItem(DATA_KEY, JSON.stringify(todos));

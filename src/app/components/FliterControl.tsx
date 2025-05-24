@@ -1,12 +1,7 @@
 import { useContext, useEffect } from "react";
 import TodoManagerContext from "../store/TodoContext";
-import {
-  ACTIVE_TODOS,
-  ALL_TODOS,
-  COMPLETED_TODOS,
-  FILTER_KEY,
-} from "../utils/types";
 import FilterButton from "./FilterButton";
+import { ACTIVE_TODOS, ALL_TODOS, COMPLETED_TODOS, FILTER_KEY } from "../types/keys";
 
 const FliterControl = () => {
   const todoManger = useContext(TodoManagerContext);

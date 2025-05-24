@@ -1,6 +1,6 @@
 import { useContext, useEffect, useRef } from "react";
 import TodoManagerContext from "../store/TodoContext";
-import { Todo } from "../utils/types";
+import { Todo } from "../types/types";
 
 const TodoInput = () => {
   const ref = useRef<HTMLInputElement>(null);

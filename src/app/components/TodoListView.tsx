@@ -1,9 +1,10 @@
 import { useContext, useEffect } from "react";
 import TodoManagerContext from "../store/TodoContext";
-import { DATA_KEY, Todo } from "../utils/types";
+import { Todo } from "../types/types";
 import ClearButton from "./ClearButton";
 import FliterControl from "./FliterControl";
 import TodoItemsList from "./TodoItemsList";
+import { DATA_KEY } from "../types/keys";
 
 const TodoListView = () => {
   const todoManger = useContext(TodoManagerContext);

@@ -1,12 +1,10 @@
 import { useContext, useEffect, useState } from "react";
 import TodoManagerContext from "../store/TodoContext";
 import {
-  ACTIVE_TODOS,
-  COMPLETED_TODOS,
-  FILTER_KEY,
   Todo,
-} from "../utils/types";
+} from "../types/types";
 import TodoItem from "./TodoItem";
+import { ACTIVE_TODOS, COMPLETED_TODOS, FILTER_KEY } from "../types/keys";
 
 const TodoItemsList = () => {
   const todoManager = useContext(TodoManagerContext);

@@ -1,10 +1,10 @@
 "use client";
 import { useEffect, useState } from "react";
-import { THEME_KEY } from "../utils/types";
 import FilterView from "./FilterView";
 import ThemeButton from "./ThemeButton";
 import TodoInput from "./TodoInput";
 import TodoListView from "./TodoListView";
+import { THEME_KEY } from "../types/keys";
 
 const Main = () => {
   const [theme, setTheme] = useState("system");
